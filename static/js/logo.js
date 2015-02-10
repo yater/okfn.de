@@ -13,7 +13,7 @@
   var radius = 25/75 * height;
   var angleOffset = -Math.PI / 180 * 3.6;
   var animAngle = 0;
-  var animAngleSpeed = 0.02;
+  var animAngleSpeed = 0;
   var lineWidth = 2;
   var lineCount = 35;
   var minLineHeight = 1;
@@ -55,24 +55,30 @@
     ctx.clearRect(0, height - radius*4/5, radius * 3, radius*4/5);
     ctx.clearRect(offset[0] + radius*2/3, 0, radius, radius * 3);
 
+    // Go to position of first column
+    var angle = Math.PI / 180 * animAngle;
+    var delta = Math.PI * 2 / lineCount;
 
-    for (var i = 0; i < lineCount; i += 1) {
-      var angle = Math.PI * 2 * i / lineCount;
-      angle = angle + angleOffset + (Math.PI / 180 * animAngle);
-      var x = radius * Math.cos(angle);
-      var y = radius * Math.sin(angle);
+    ctx.translate(offset[0] + radius * Math.cos(angle),
+                  offset[1] + radius * Math.sin(angle));
+
+    for (var i = 0; i < 3; i += 1) {
       var lineHeight = lineHeights[i];
 
-      ctx.save();
-
-      ctx.translate(offset[0] + x, offset[1] + y);
+      console.log(angle);
       ctx.rotate(angle);
-
       ctx.beginPath();
       ctx.rect(0, 0, lineHeight, lineWidth);
       ctx.fill();
+      ctx.rotate(-angle);
 
-      ctx.restore();
+      angle += delta;
+
+      ctx.translate(radius * (Math.cos(angle + delta) - Math.cos(angle)),
+                    -radius * (Math.sin(angle + delta) + Math.sin(angle)));
+
+                    console.log(radius * (Math.cos(angle + delta) - Math.cos(angle)),
+                                -radius * (Math.sin(angle + delta) + Math.sin(angle)));
     }
   };
 
@@ -94,7 +100,7 @@
     animAngle = (animAngle + animAngleSpeed) % 360;
     adjust(lineHeights, targetLineHeights);
     drawAura();
-    window.requestAnimationFrame(animate);
+    //window.requestAnimationFrame(animate);
   };
 
   window.requestAnimationFrame(animate);
