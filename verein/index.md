@@ -51,9 +51,11 @@ Freies Wissen hilft Bürgerinnen und Bürgern, sich zu informieren und führt zu
 
 Open Knowledge Foundation Deutschland e.V.
 
-Vereinsregister:
+Vereinsregister/Sitz:
 Schlesische Str. 6
 D-10997 Berlin
+Adresse: Singerstr. 109
+D-10179 Berlin 
 Vereinsregister Nr: VR 30468 B
 Steuernummer: 27/674/52428
 VAT: DE278022128
